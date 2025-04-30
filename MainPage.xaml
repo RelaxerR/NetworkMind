@@ -19,6 +19,15 @@
                FontSize="20"
                HorizontalOptions="Center"
                Grid.Row="0"/>
+        
+        <!-- Кнопка "Проверить" -->
+        <Button Text="Проверить"
+                FontSize="18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Row="0"
+                Margin="0,40,0,0"
+                Clicked="CheckBtn_Clicked"/>
 
         <!-- Контейнер с двумя коммутаторами -->
         <StackLayout Orientation="Vertical"
@@ -30,7 +39,7 @@
             <Grid x:Name="Switch1Container" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Image Source="switch1.png" WidthRequest="500" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
                 <!-- Точки -->
-                <Grid VerticalOptions="Center" Margin="60, 0, 0, 0">
+                <Grid x:Name="Switch1ContainerDots" VerticalOptions="Center" Margin="60, 0, 0, 0">
                     <!-- Первая строка из 9 красных точек -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -89,7 +98,7 @@
             <Grid x:Name="Switch2Container" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Image Source="switch1.png" WidthRequest="500" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
                 <!-- Точки -->
-                <Grid VerticalOptions="Center" Margin="60, 0, 0, 0">
+                <Grid x:Name="Switch2ContainerDots" VerticalOptions="Center" Margin="60, 0, 0, 0">
                     <!-- Первая строка из 9 красных точек -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
