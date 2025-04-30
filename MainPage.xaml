@@ -28,12 +28,12 @@
 
             <!-- Коммутатор 1 -->
             <Grid x:Name="Switch1Container" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Image Source="switch1.png" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
+                <Image Source="switch1.png" WidthRequest="500" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
             </Grid>
 
             <!-- Коммутатор 2 -->
             <Grid x:Name="Switch2Container" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Image Source="switch1.png" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
+                <Image Source="switch1.png" WidthRequest="500" HorizontalOptions="Fill" VerticalOptions="FillAndExpand"/>
             </Grid>
 
         </StackLayout>
