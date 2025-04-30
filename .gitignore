@@ -1,0 +1,109 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+arm64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+artifacts/
+
+# Visual Studio cache directories
+.ipch/
+*.ncb
+*.aps
+*.pch
+*.pdb
+
+# Visual Studio project files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider / ReSharper
+_ReSharper*/
+*ReSharper*
+*.DotSettings.user
+*.JetBrains*
+
+# Visual Studio Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# MSBuild
+*.props
+*.targets
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+project.assets.json
+project.lock.json
+
+# macOS
+*.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+macOS/.Trash/
+.CiscoUcsManager
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Linux
+*.swp
+*.tmp
+
+# .NET specific
+*.log
+*.VC.db
+*.VC.opendb
+*.dotCover
+*.dotTrace
+*.pidb
+*.mdb
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.msym
+*.mod
+*.symstore
+
+# Localisation
+*.resx
+
+# iOS
+*.mobileprovision
+*.provisionprofile
+*.cer
+*.p12
+
+# Android
+*.keystore
+*.jks
+local.properties
+.idea/
+gradle/
+app/build/
+bin/
+obj/
