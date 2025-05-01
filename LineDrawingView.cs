@@ -24,7 +24,7 @@ public class LineDrawingView : GraphicsView, IDrawable
         if (_startPoint == null || _endPoint == null) return;
 
         canvas.StrokeColor = Colors.Blue;
-        canvas.StrokeSize = 2;
+        canvas.StrokeSize = 10;
 
         // Рисуем линию
         canvas.DrawLine((float)_startPoint.Value.X, (float)_startPoint.Value.Y, (float)_endPoint.Value.X, (float)_endPoint.Value.Y);

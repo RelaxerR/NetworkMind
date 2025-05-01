@@ -44,8 +44,10 @@ public partial class MainPage : ContentPage
         var column = Grid.GetColumn(ellipse);
 
         // Вычисление координат в пикселях
-        var x = column * (parentGrid.Width / parentGrid.ColumnDefinitions.Count);
-        var y = row * (parentGrid.Height / parentGrid.RowDefinitions.Count);
+        var x = column * (parentGrid.Width / parentGrid.ColumnDefinitions.Count) + (ellipse.Width / 2);
+        var y = row * (parentGrid.Height / parentGrid.RowDefinitions.Count) + (ellipse.Height / 2);
+        
+        Console.WriteLine($"x: {x}, y: {y}");
 
         return new Point(x, y);
     }
@@ -105,6 +107,28 @@ public partial class MainPage : ContentPage
     }
     #endregion
 
+    #region GetCoords
+
+    public static IEnumerable<VisualElement> Ancestors(VisualElement element)
+    {
+        while(element != null)
+        {
+            yield return element;
+            element = element.Parent as VisualElement;
+        }
+    }
+    private static Point GetAbsolutePosition(VisualElement visualElement)
+    {
+        var ancestors = Ancestors(visualElement);
+        var x = ancestors.Sum(ancestor => ancestor.X) - (visualElement.Width / 2);
+        var y = ancestors.Sum(ancestor => ancestor.Y) - (visualElement.Height / 2);
+
+        return new Point(x, y);
+    }
+    
+
+    #endregion
+    
     #region Btns
 
     private void CheckBtn_Clicked(object? sender, EventArgs e)
@@ -129,13 +153,13 @@ public partial class MainPage : ContentPage
             tappedPoint.Fill = new SolidColorBrush(Colors.Green); // Выделение точки
 
             // Получение координат точек
-            var startPoint = GetPointCoordinates(_selectedPoint1);
-            var endPoint = GetPointCoordinates(_selectedPoint2);
+            var startPoint = GetAbsolutePosition(_selectedPoint1);
+            var endPoint = GetAbsolutePosition(_selectedPoint2);
 
             // Рисование линии
             if (startPoint != null && endPoint != null)
             {
-                LineCanvas.SetPoints(startPoint.Value, endPoint.Value);
+                LineCanvas.SetPoints(startPoint, endPoint);
             }
 
             // Сброс выделения
