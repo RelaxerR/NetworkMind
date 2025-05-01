@@ -20,6 +20,64 @@ public partial class MainPage : ContentPage
         AddTapGestureToPoints(Switch2ContainerDots);
     }
 
+    #region Check
+
+    private bool CheckConnections()
+    {
+        bool allConnectionsCorrect = true;
+
+        foreach (var connection in _pointLines)
+        {
+            var point1 = connection.Key;
+            var (start, end) = connection.Value;
+
+            // Получаем названия точек из Label над точками
+            var label1 = GetLabelAbovePoint(point1);
+            var label2 = GetLabelAbovePoint(_pointLines.FirstOrDefault(p => p.Value.Start == end).Key);
+                
+            Console.WriteLine($"label1: {label1?.Text}, label2: {label2?.Text}");
+            
+            if (label1 == null || label2 == null || label1.Text != label2.Text)
+            {
+                allConnectionsCorrect = false;
+                break;
+            }
+        }
+
+        if (allConnectionsCorrect)
+        {
+            Console.WriteLine("Все соединения корректны!");
+        }
+        else
+        {
+            Console.WriteLine("Есть некорректные соединения.");
+        }
+
+        return allConnectionsCorrect;
+    }
+
+    private Label? GetLabelAbovePoint(Ellipse point)
+    {
+        var parentGrid = point.Parent as Grid;
+        if (parentGrid == null) return null;
+
+        // Получаем колонку точки
+        int column = Grid.GetColumn(point);
+
+        // Ищем Label в этой колонке
+        foreach (var child in parentGrid.Children)
+        {
+            if (child is Label label && Grid.GetColumn(label) == column)
+            {
+                return label;
+            }
+        }
+
+        return null;
+    }
+
+    #endregion
+
     #region Select nodes
 
     private void AddTapGestureToPoints(Grid grid)
@@ -114,12 +172,20 @@ public partial class MainPage : ContentPage
     
     #region Btns
 
-    private void CheckBtn_Clicked(object? sender, EventArgs e)
+    private async void CheckBtn_Clicked(object? sender, EventArgs e)
     {
         Console.WriteLine("CheckBtn_Clicked");
-        LineCanvas.ClearLines(); // Очищаем линии перед обновлением
-        UpdatePoints(Switch1ContainerDots);
-        UpdatePoints(Switch2ContainerDots);
+        if (CheckConnections())
+        {
+            LineCanvas.ClearLines(); // Очищаем линии перед обновлением
+            UpdatePoints(Switch1ContainerDots);
+            UpdatePoints(Switch2ContainerDots);
+            await DisplayAlert("Результат", "Все соединения корректны!", "OK");
+        }
+        else
+        {
+            await DisplayAlert("Результат", "Есть некорректные соединения.", "OK");
+        }
     }
     
     private readonly Dictionary<Ellipse, (Point Start, Point End)> _pointLines = new();
@@ -167,7 +233,19 @@ public partial class MainPage : ContentPage
             _selectedPoint2 = null;
         }
     }
-    
+    private void ClearBtn_OnClicked(object? sender, EventArgs e)
+    {
+        LineCanvas.ClearLines(); // Очищаем все линии
+        _pointLines.Clear(); // Очищаем словарь линий
+        Console.WriteLine("Все линии очищены.");
+    }
+
+    private async void BackBtn_OnClicked(object? sender, EventArgs e)
+    {
+        // Переход в меню
+        await Navigation.PopToRootAsync();
+        Console.WriteLine("Возврат в меню.");
+    }
 
     #endregion
 }

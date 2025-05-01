@@ -22,14 +22,18 @@
                HorizontalOptions="Center"
                Grid.Row="0"/>
         
-        <!-- Кнопка "Проверить" -->
-        <Button Text="Проверить"
-                FontSize="18"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                Grid.Row="0"
-                Margin="0,40,0,0"
-                Clicked="CheckBtn_Clicked"/>
+       <!-- Кнопка "Проверить" -->
+       <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="20" Grid.Row="0" Margin="0,40,0,0">
+           <Button Text="Проверить"
+                   FontSize="18"
+                   Clicked="CheckBtn_Clicked"/>
+           <Button Text="Очистить"
+                   FontSize="18"
+                   Clicked="ClearBtn_OnClicked"/>
+           <Button Text="Назад"
+                   FontSize="18"
+                   Clicked="BackBtn_OnClicked"/>
+       </StackLayout>
 
         <!-- Контейнер с двумя коммутаторами -->
         <StackLayout Orientation="Vertical"
@@ -62,37 +66,46 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Текст -->
-                    <Label Grid.Row="0" Grid.Column="0" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="1" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="2" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="3" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="4" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="5" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="6" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="7" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="8" WidthRequest="20" HeightRequest="20">*</Label>
+                    <Label Grid.Row="0" Grid.Column="0" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="1" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="2" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="3" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="4" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="5" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="6" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="7" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="8" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
                     
                     <!-- Первая строка -->
-                    <Ellipse Grid.Row="1" Grid.Column="0" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="1" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="2" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="3" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="4" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="5" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="6" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="7" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="8" WidthRequest="20" HeightRequest="20" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="0" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="1" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="2" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="3" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="4" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="5" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="6" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="7" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="8" WidthRequest="30" HeightRequest="30" Fill="Red"/>
 
                     <!-- Вторая строка -->
-                    <Ellipse Grid.Row="2" Grid.Column="0" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="1" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="2" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="3" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="4" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="5" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="6" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="7" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="8" WidthRequest="20" HeightRequest="20" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="0" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="1" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="2" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="3" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="4" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="5" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="6" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="7" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="8" WidthRequest="30" HeightRequest="30" Fill="Red"/>
                 </Grid>
             </Grid>
 
@@ -121,37 +134,46 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Текст -->
-                    <Label Grid.Row="0" Grid.Column="0" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="1" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="2" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="3" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="4" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="5" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="6" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="7" WidthRequest="20" HeightRequest="20">*</Label>
-                    <Label Grid.Row="0" Grid.Column="8" WidthRequest="20" HeightRequest="20">*</Label>
+                    <Label Grid.Row="0" Grid.Column="0" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="1" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="2" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="3" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="4" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="5" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="6" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="7" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
+                    <Label Grid.Row="0" Grid.Column="8" WidthRequest="30" HeightRequest="30" Text="*" 
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="8"/>
                     
                     <!-- Первая строка -->
-                    <Ellipse Grid.Row="1" Grid.Column="0" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="1" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="2" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="3" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="4" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="5" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="6" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="7" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="1" Grid.Column="8" WidthRequest="20" HeightRequest="20" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="0" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="1" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="2" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="3" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="4" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="5" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="6" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="7" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="1" Grid.Column="8" WidthRequest="30" HeightRequest="30" Fill="Red"/>
 
                     <!-- Вторая строка -->
-                    <Ellipse Grid.Row="2" Grid.Column="0" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="1" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="2" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="3" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="4" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="5" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="6" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="7" WidthRequest="20" HeightRequest="20" Fill="Red"/>
-                    <Ellipse Grid.Row="2" Grid.Column="8" WidthRequest="20" HeightRequest="20" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="0" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="1" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="2" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="3" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="4" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="5" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="6" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="7" WidthRequest="30" HeightRequest="30" Fill="Red"/>
+                    <Ellipse Grid.Row="2" Grid.Column="8" WidthRequest="30" HeightRequest="30" Fill="Red"/>
                 </Grid>
             </Grid>
 
