@@ -243,7 +243,7 @@ public partial class MainPage : ContentPage
     private async void BackBtn_OnClicked(object? sender, EventArgs e)
     {
         // Переход в меню
-        await Navigation.PopToRootAsync();
+        Application.Current.MainPage = new NavigationPage(new MainMenu());
         Console.WriteLine("Возврат в меню.");
     }
 
