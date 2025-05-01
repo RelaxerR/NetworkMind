@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:networkMind="clr-namespace:NetworkMind"
              x:Class="NetworkMind.MainPage">
 
     <Grid RowDefinitions="Auto, *" Padding="20"
           HorizontalOptions="FillAndExpand"
           VerticalOptions="FillAndExpand">
+        
         <!-- Фоновое изображение -->
         <Image Source="background.jpg"
                Aspect="AspectFill"
@@ -155,6 +157,13 @@
 
         </StackLayout>
 
+        <!-- Canvas для рисования -->
+        <networkMind:LineDrawingView x:Name="LineCanvas"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalOptions="FillAndExpand"
+                               Grid.RowSpan="2"
+                               InputTransparent="True"/>
+        
     </Grid>
 
 </ContentPage>

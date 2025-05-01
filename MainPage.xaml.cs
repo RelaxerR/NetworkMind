@@ -10,10 +10,51 @@ public partial class MainPage : ContentPage
     private readonly List<string> _randomTexts = new() { "GE0/1", "GE0/2", "FE0/1", "FE0/2", "S0/0/0", "S0/0/1", "V1", "L0", "E1/0", "E1/1" };
     private readonly Random _random = new();
     
+    private Ellipse? _selectedPoint1;
+    private Ellipse? _selectedPoint2;
+    
     public MainPage()
     {
         InitializeComponent();
+        AddTapGestureToPoints(Switch1ContainerDots);
+        AddTapGestureToPoints(Switch2ContainerDots);
     }
+
+    #region Select nodes
+
+    private void AddTapGestureToPoints(Grid grid)
+    {
+        foreach (var child in grid.Children)
+        {
+            if (child is Ellipse ellipse)
+            {
+                var tapGesture = new TapGestureRecognizer();
+                tapGesture.Tapped += OnPointTapped;
+                ellipse.GestureRecognizers.Add(tapGesture);
+            }
+        }
+    }
+    
+    private Point? GetPointCoordinates(Ellipse ellipse)
+    {
+        if (ellipse.Parent is not Grid parentGrid) return null;
+
+        // Получение позиции точки в сетке
+        var row = Grid.GetRow(ellipse);
+        var column = Grid.GetColumn(ellipse);
+
+        // Вычисление координат в пикселях
+        var x = column * (parentGrid.Width / parentGrid.ColumnDefinitions.Count) + (ellipse.Width / 2);
+        var y = row * (parentGrid.Height / parentGrid.RowDefinitions.Count) + (ellipse.Height / 2);
+        
+        Console.WriteLine($"x: {x}, y: {y}");
+
+        return new Point(x, y);
+    }
+
+    #endregion
+
+    #region Level genertion
     
     public void UpdatePoints(Grid grid)
     {
@@ -64,6 +105,31 @@ public partial class MainPage : ContentPage
             }
         }
     }
+    #endregion
+
+    #region GetCoords
+
+    public static IEnumerable<VisualElement> Ancestors(VisualElement element)
+    {
+        while(element != null)
+        {
+            yield return element;
+            element = element.Parent as VisualElement;
+        }
+    }
+    private static Point GetAbsolutePosition(VisualElement visualElement)
+    {
+        var ancestors = Ancestors(visualElement);
+        var x = ancestors.Sum(ancestor => ancestor.X) - (visualElement.Width / 2);
+        var y = ancestors.Sum(ancestor => ancestor.Y) - (visualElement.Height / 2);
+
+        return new Point(x, y);
+    }
+    
+
+    #endregion
+    
+    #region Btns
 
     private void CheckBtn_Clicked(object? sender, EventArgs e)
     {
@@ -71,4 +137,39 @@ public partial class MainPage : ContentPage
         UpdatePoints(Switch1ContainerDots);
         UpdatePoints(Switch2ContainerDots);
     }
+    
+    private void OnPointTapped(object? sender, EventArgs e)
+    {
+        if (sender is not Ellipse tappedPoint) return;
+
+        if (_selectedPoint1 == null)
+        {
+            _selectedPoint1 = tappedPoint;
+            tappedPoint.Fill = new SolidColorBrush(Colors.Green); // Выделение точки
+        }
+        else if (_selectedPoint2 == null)
+        {
+            _selectedPoint2 = tappedPoint;
+            tappedPoint.Fill = new SolidColorBrush(Colors.Green); // Выделение точки
+
+            // Получение координат точек
+            var startPoint = GetAbsolutePosition(_selectedPoint1);
+            var endPoint = GetAbsolutePosition(_selectedPoint2);
+
+            // Рисование линии
+            if (startPoint != null && endPoint != null)
+            {
+                LineCanvas.SetPoints(startPoint, endPoint);
+            }
+
+            // Сброс выделения
+            _selectedPoint1.Fill = new SolidColorBrush(Colors.Red);
+            _selectedPoint2.Fill = new SolidColorBrush(Colors.Red);
+            _selectedPoint1 = null;
+            _selectedPoint2 = null;
+        }
+    }
+    
+
+    #endregion
 }
