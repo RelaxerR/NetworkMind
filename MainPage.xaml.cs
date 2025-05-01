@@ -34,23 +34,6 @@ public partial class MainPage : ContentPage
             }
         }
     }
-    
-    private Point? GetPointCoordinates(Ellipse ellipse)
-    {
-        if (ellipse.Parent is not Grid parentGrid) return null;
-
-        // Получение позиции точки в сетке
-        var row = Grid.GetRow(ellipse);
-        var column = Grid.GetColumn(ellipse);
-
-        // Вычисление координат в пикселях
-        var x = column * (parentGrid.Width / parentGrid.ColumnDefinitions.Count) + (ellipse.Width / 2);
-        var y = row * (parentGrid.Height / parentGrid.RowDefinitions.Count) + (ellipse.Height / 2);
-        
-        Console.WriteLine($"x: {x}, y: {y}");
-
-        return new Point(x, y);
-    }
 
     #endregion
 
@@ -134,13 +117,24 @@ public partial class MainPage : ContentPage
     private void CheckBtn_Clicked(object? sender, EventArgs e)
     {
         Console.WriteLine("CheckBtn_Clicked");
+        LineCanvas.ClearLines(); // Очищаем линии перед обновлением
         UpdatePoints(Switch1ContainerDots);
         UpdatePoints(Switch2ContainerDots);
     }
     
+    private readonly Dictionary<Ellipse, (Point Start, Point End)> _pointLines = new();
+
     private void OnPointTapped(object? sender, EventArgs e)
     {
         if (sender is not Ellipse tappedPoint) return;
+
+        // Удаление старой линии, если она существует
+        if (_pointLines.ContainsKey(tappedPoint))
+        {
+            var lineToRemove = _pointLines[tappedPoint];
+            LineCanvas.RemoveLine(lineToRemove.Start, lineToRemove.End); // Удаляем конкретную линию
+            _pointLines.Remove(tappedPoint); // Удаляем из словаря
+        }
 
         if (_selectedPoint1 == null)
         {
@@ -160,6 +154,10 @@ public partial class MainPage : ContentPage
             if (startPoint != null && endPoint != null)
             {
                 LineCanvas.SetPoints(startPoint, endPoint);
+
+                // Сохранение линии в словарь
+                _pointLines[_selectedPoint1] = (startPoint, endPoint);
+                _pointLines[_selectedPoint2] = (endPoint, startPoint);
             }
 
             // Сброс выделения
