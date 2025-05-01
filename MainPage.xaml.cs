@@ -34,6 +34,21 @@ public partial class MainPage : ContentPage
             }
         }
     }
+    
+    private Point? GetPointCoordinates(Ellipse ellipse)
+    {
+        if (ellipse.Parent is not Grid parentGrid) return null;
+
+        // Получение позиции точки в сетке
+        var row = Grid.GetRow(ellipse);
+        var column = Grid.GetColumn(ellipse);
+
+        // Вычисление координат в пикселях
+        var x = column * (parentGrid.Width / parentGrid.ColumnDefinitions.Count);
+        var y = row * (parentGrid.Height / parentGrid.RowDefinitions.Count);
+
+        return new Point(x, y);
+    }
 
     #endregion
 
@@ -113,7 +128,21 @@ public partial class MainPage : ContentPage
             _selectedPoint2 = tappedPoint;
             tappedPoint.Fill = new SolidColorBrush(Colors.Green); // Выделение точки
 
-            // TODO: draw line
+            // Получение координат точек
+            var startPoint = GetPointCoordinates(_selectedPoint1);
+            var endPoint = GetPointCoordinates(_selectedPoint2);
+
+            // Рисование линии
+            if (startPoint != null && endPoint != null)
+            {
+                LineCanvas.SetPoints(startPoint.Value, endPoint.Value);
+            }
+
+            // Сброс выделения
+            _selectedPoint1.Fill = new SolidColorBrush(Colors.Red);
+            _selectedPoint2.Fill = new SolidColorBrush(Colors.Red);
+            _selectedPoint1 = null;
+            _selectedPoint2 = null;
         }
     }
     
