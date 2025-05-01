@@ -5,7 +5,7 @@ namespace NetworkMind;
 
 public class LineDrawingView : GraphicsView, IDrawable
 {
-    private readonly List<(Point Start, Point End)> _lines = new();
+    private readonly List<(Point Start, Point End, Color LineColor, float StrokeSize)> _lines = new();
     private readonly Random _random;
     private readonly List<Color> _colors = new()
     {
@@ -24,7 +24,9 @@ public class LineDrawingView : GraphicsView, IDrawable
 
     public void SetPoints(Point start, Point end)
     {
-        _lines.Add((start, end)); // Добавляем новую линию в список
+        var color = _colors[_random.Next(_colors.Count)];
+        var strokeSize = _random.Next(minStrokeSize, maxStrokeSize);
+        _lines.Add((start, end, color, strokeSize)); // Добавляем новую линию с цветом и размером
         Invalidate(); // Перерисовать
     }
 
@@ -33,20 +35,20 @@ public class LineDrawingView : GraphicsView, IDrawable
         _lines.Clear(); // Очищаем список линий
         Invalidate(); // Перерисовать
     }
+
     public void RemoveLine(Point start, Point end)
     {
-        _lines.Remove((start, end)); // Удаляем линию из списка
+        _lines.RemoveAll(line => line.Start == start && line.End == end); // Удаляем линию из списка
         Invalidate(); // Перерисовать
     }
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
-        canvas.StrokeColor = _colors[_random.Next(_colors.Count)];
-        canvas.StrokeSize = _random.Next(minStrokeSize, maxStrokeSize);
-
         // Рисуем все линии из списка
         foreach (var line in _lines)
         {
+            canvas.StrokeColor = line.LineColor; // Используем сохранённый цвет
+            canvas.StrokeSize = line.StrokeSize; // Используем сохранённый размер
             canvas.DrawLine((float)line.Start.X, (float)line.Start.Y, (float)line.End.X, (float)line.End.Y);
         }
     }
