@@ -21,10 +21,19 @@ public partial class MainPage : ContentPage
     }
 
     #region Check
-
+    
     private bool CheckConnections()
     {
         bool allConnectionsCorrect = true;
+
+        // Сбрасываем цвет всех точек перед проверкой
+        foreach (var child in Switch1ContainerDots.Children.Concat(Switch2ContainerDots.Children))
+        {
+            if (child is Ellipse point)
+            {
+                point.Fill = new SolidColorBrush(Colors.Red); // Исходный цвет
+            }
+        }
 
         foreach (var connection in _pointLines)
         {
@@ -34,13 +43,20 @@ public partial class MainPage : ContentPage
             // Получаем названия точек из Label над точками
             var label1 = GetLabelAbovePoint(point1);
             var label2 = GetLabelAbovePoint(_pointLines.FirstOrDefault(p => p.Value.Start == end).Key);
-                
+
             Console.WriteLine($"label1: {label1?.Text}, label2: {label2?.Text}");
-            
+
             if (label1 == null || label2 == null || label1.Text != label2.Text)
             {
                 allConnectionsCorrect = false;
-                break;
+
+                // Подсвечиваем некорректные точки
+                point1.Fill = new SolidColorBrush(Colors.Yellow);
+                var point2 = _pointLines.FirstOrDefault(p => p.Value.Start == end).Key;
+                if (point2 != null)
+                {
+                    point2.Fill = new SolidColorBrush(Colors.Yellow);
+                }
             }
         }
 
