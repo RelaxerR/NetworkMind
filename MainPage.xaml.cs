@@ -18,6 +18,8 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         AddTapGestureToPoints(Switch1ContainerDots);
         AddTapGestureToPoints(Switch2ContainerDots);
+        UpdatePoints(Switch1ContainerDots);
+        UpdatePoints(Switch2ContainerDots);
     }
 
     #region Check
@@ -35,6 +37,7 @@ public partial class MainPage : ContentPage
             }
         }
 
+        // Проверяем существующие соединения
         foreach (var connection in _pointLines)
         {
             var point1 = connection.Key;
@@ -43,8 +46,6 @@ public partial class MainPage : ContentPage
             // Получаем названия точек из Label над точками
             var label1 = GetLabelAbovePoint(point1);
             var label2 = GetLabelAbovePoint(_pointLines.FirstOrDefault(p => p.Value.Start == end).Key);
-
-            Console.WriteLine($"label1: {label1?.Text}, label2: {label2?.Text}");
 
             if (label1 == null || label2 == null || label1.Text != label2.Text)
             {
@@ -56,6 +57,44 @@ public partial class MainPage : ContentPage
                 if (point2 != null)
                 {
                     point2.Fill = new SolidColorBrush(Colors.Yellow);
+                }
+            }
+        }
+
+        // Проверяем точки с одинаковыми названиями
+        var allPoints = Switch1ContainerDots.Children.Concat(Switch2ContainerDots.Children)
+            .OfType<Ellipse>()
+            .ToList();
+
+        var groupedPoints = allPoints
+            .Select(point => new { Point = point, Label = GetLabelAbovePoint(point)?.Text })
+            .Where(x => x.Label != null)
+            .GroupBy(x => x.Label);
+
+        foreach (var group in groupedPoints)
+        {
+            var points = group.Select(x => x.Point).ToList();
+
+            // Если точек с одинаковым названием больше двух
+            if (points.Count > 2)
+            {
+                for (int i = 0; i < points.Count; i++)
+                {
+                    for (int j = i + 1; j < points.Count; j++)
+                    {
+                        var point1 = points[i];
+                        var point2 = points[j];
+
+                        // Если точки не соединены
+                        if (!_pointLines.ContainsKey(point1) && !_pointLines.ContainsKey(point2))
+                        {
+                            allConnectionsCorrect = false;
+
+                            // Подсвечиваем некорректные точки
+                            point1.Fill = new SolidColorBrush(Colors.Yellow);
+                            point2.Fill = new SolidColorBrush(Colors.Yellow);
+                        }
+                    }
                 }
             }
         }
